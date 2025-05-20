@@ -30,7 +30,6 @@ namespace Web.Controllers
         public LoginController(IConfiguration _configuration, IMemoryCache memoryCacheInterface, IHttpClientFactory httpClientFactory)
         {
             configuration = _configuration;
-            s3UserIamgeFolderName = configuration["ApiSettings:s3UserIamgeFolderName"];
             string baseUrl = configuration["ApiSettings:BaseUrl"];
             this.client = httpClientFactory.CreateClient("HttpClientForApiTimeOut");
             client.BaseAddress = new Uri(baseUrl);

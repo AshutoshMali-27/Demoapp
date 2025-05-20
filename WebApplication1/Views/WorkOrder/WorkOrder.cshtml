@@ -1,0 +1,307 @@
+﻿@{
+    ViewData["Title"] = "WorkOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.AntiForgeryToken()
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 style="color:white;">
+                Work Order
+            </h4>
+            <div class="card-header-action">
+                <button id="btnBack" class="btn btn-lg btn-icon icon-left btn-danger" onclick="window.location.href='/Home/Index'"><i class="fas fa-backward"></i> Back</button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="card card-primary" style="box-shadow:9px 16px 16px 2px;">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>Financial Year<span style="color:red"> *</span></label>
+                            <select class="form-control" id="ddlFinancialYear" disabled>
+                                <option value="0" selected="selected">--Select Financial Year --</option>
+                                @foreach (var item in ViewBag.lst_financialYear)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Scheme<span style="color:red"> *</span></label>
+                            <select class="form-control" id="ddl_SchemeName">
+                                <option value="0" selected="selected">--Select Scheme Name--</option>
+                                @foreach (var item in ViewBag.lst_Schemes)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Component</label>
+                            <select class="form-control" id="ddl_ComponentName">
+                                <option value="0" selected="selected">--Select Component--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row" id="DivAdminApprovalNo" style="display:none;">
+                        <div class="form-group col-md-4">
+                            <label>Admin Approval No<span style="color:red"> *</span></label>
+                            <select class="form-control" id="ddl_AdminApprovalNo">
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label id="SerachBylabel"> Vendor Search By</label>
+                            <select class="form-control" id="ddlSearch" tabindex="7">
+                                <option value="1" selected>PAN Number</option>
+                                <option value="2">TAN Number</option>
+                                <option value="3">AADHAR Number</option>
+                                <option value="4">Name</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="InsertHere" id="lbl_Search">Enter PAN Number</label>
+                            <input type="text" class="form-control" id="txtInsertHere" tabindex="8" placeholder="Insert Here" maxlength="12">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="VendorName" id="lblBeneficiary">Vendor Name<span style="color:red"> *</span></label>
+                            <input type="hidden" class="form-control" id="Party_ID" />
+                            <input type="text" class="form-control" id="txtVendorName" placeholder="Vendor Name" readonly>
+                        </div>
+                    </div>
+                    <div class="card-body TClass" id="div_tblAdminApprovalDetails" style="display:none;">
+                        <div class="table-responsive">
+                            <table class="table table-striped border" id="tblAdminApprovalDetails" width="100%">
+                                <thead style="background-color:  #ECECFE;">
+                                    <tr>
+                                        <th>Admin Approval Date</th>
+                                        <th>Admin Approval Amount</th>
+                                        <th>Work Order Total</th>
+                                        <th>Remaining Admin Approval Amount</th>
+                                        <th>Approval By</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody_AdminApprovalDetails">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-body TClass" id="div_tblVendorList" style="overflow-x:auto; overflow-y:auto;display:none;">
+                        <div class="table-responsive" style="max-height: 300px;">
+                            <table class="table table-striped border" id="tblVendorList" width="100%">
+                                <thead class="header-fixed" style="background-color:  #ECECFE;">
+                                    <tr>
+                                        <th>Select</th>
+                                        <th>Party Name</th>
+                                        <th>Account No.</th>
+                                        <th>IFSC Code</th>
+                                        <th>Bank Name</th>
+                                        <th>Branch Name</th>
+                                        <th>MICR Code</th>
+                                        <th>PAN NO.</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody_tblVendorList">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-body TClass" id="div_tblVendor" style="overflow-x:auto; overflow-y:auto;display:none;">
+                        <div class="table-responsive" style="max-height: 300px;">
+                            <table class="table table-striped border" id="tblVendor" width="100%">
+                                <thead style="background-color:  #ECECFE;">
+                                    <tr>
+                                        <th style="display:none;">ID</th>
+                                        <th>Party Name</th>
+                                        <th>Account No.</th>
+                                        <th>IFSC Code</th>
+                                        <th>Bank Name</th>
+                                        <th>Branch Name</th>
+                                        <th>MICR Code</th>
+                                        <th>PAN NO.</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td id="td_Id" style="display:none;"></td>
+                                        <td id="td_PartyName"></td>
+                                        <td id="td_AccountNo"></td>
+                                        <td id="td_IFSCCode"></td>
+                                        <td id="td_BankName"></td>
+                                        <td id="td_BranchName"></td>
+                                        <td id="td_MicrCode"></td>
+                                        <td id="td_PANNO"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-row" id="DivWorkName" style="display:none;">
+                        <div class="form-group col-md-4">
+                            <label for="WorkName">Work Name<span style="color:red"> *</span></label>
+                            <textarea class="form-control" MaxLength="500" id="WorkName" placeholder="Work Name"></textarea>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Work Status<span style="color:red"> *</span></label>
+                            <select class="form-control" id="ddlStatus">
+                                <option value="0" selected="selected">--Select Work Status--</option>
+                                @foreach (var item in ViewBag.lst_WorkStatus)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="WorkOrderNo">Work Order Number<span style="color:red"> *</span></label>
+                            <input type="text" class="form-control" id="WorkOrderNumber" placeholder="Work Order Number" disabled>
+                        </div>
+                    </div>
+                    <div class="form-row" id="DivLastRANo" style="display:none;">
+                        <div class="form-group col-md-4">
+                            <label>Last RA Number</label>
+                            <select class="form-control" id="ddlLastRA">
+                                <option value="0" selected="selected">--Select Last RA No--</option>
+                                @foreach (var item in ViewBag.lst_LastBillSequence)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Work Order Date<span style="color:red"> *</span></label>
+                            <input type="date" id="WorkOrderDate" class="form-control datepicker">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Work End Date<span style="color:red"> *</span></label>
+                            <input type="date" id="WorkEndDate" class="form-control datepicker">
+                        </div>
+                    </div>
+                    <div class="form-row" id="DivApprovedTenderAmount" style="display:none;">
+                        <div class="form-group col-md-4">
+                            <label for="ApprovedTenderAmount">Approved Tender Amount<span style="color:red"> *</span></label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><b>₹.</b></span>
+                                </div>
+                                <input type="text" class="form-control text-right" id="txtApprovedTenderAmount" aria-label="Amount (to the nearest Rupees)" maxlength="10" onkeypress="return numericOnly(this);">
+
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="PaidAmount">Paid Amount<span style="color:red"> *</span></label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><b>₹.</b></span>
+                                </div>
+                                <input type="text" class="form-control text-right" id="txtPaidAmount" aria-label="Amount (to the nearest Rupees)" maxlength="10" onkeypress="return numericOnly(this);">
+
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="RemaingAmount">Remaining Amount</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><b>₹.</b></span>
+                                </div>
+                                <input type="text" class="form-control text-right" id="txtRemaingAmount" aria-label="Amount (to the nearest Rupees)" readonly onkeypress="return numericOnly(this);">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row" id="DivCostPutToTender" style="display:none;">
+                        <div class="form-group col-md-4">
+                            <label for="CostPutToTender">Cost Put To Tender</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><b>₹.</b></span>
+                                </div>
+                                <input type="text" class="form-control text-right" id="txtCostPutToTender" aria-label="Amount (to the nearest Rupees)" maxlength="10" onkeypress="return numericOnly(this);">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Copy Of Work Order<span style="color:red"> *</span></label><br />
+                            <input type="file" id="file_WorkOrderCopy" class="form-control" accept=".pdf" title="Note: Upload pdfs up to 10 MB only" style="color:transparent;">
+                            <div style="display: flex; align-items: center; margin-top: 10px;">
+                                <b> <label id="lbl_WorkOrderCopy" class="label-hover" style="color:red; margin-right: 10px;" onclick="DisplayPdfFile(this.innerText)"></label></b>
+                                <button class="btn btn-danger" type="button" id="removeWorkOrderCopy" style="display:none; height: 19px; width: 19px;padding:0;margin-top:-1px;margin-bottom:2px;" onclick="removeWorkOrderCopy()">
+                                    <span style="display: flex; align-items: center; justify-content: center; height: 100%;">X</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <br />
+                            <br />
+                            <div class="pretty p-icon p-smooth">
+                                <input type="checkbox" id="chk_IsWorkFullAndFinal" />
+                                <div class="state p-success">
+                                    <i class="icon fa fa-check"></i>
+                                    <label>Is Work Full And Final</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons align-center">
+                        <button id="btnSave" class="btn btn-lg btn-icon icon-left btn-primary" style="display:none;"><i class="fas fa-check"></i> Save</button>
+                        <button id="btnClear" class="btn btn-lg btn-icon icon-left btn-warning"><i class="fas fa-times"></i> Clear</button>
+                    </div>
+                    <div class="card-body" style="overflow-x:auto; overflow-y:auto; display:none;" id="div_WorkOrderDetails">
+                        <div class="table-responsive" style="max-height: 450px;">
+                            <table class="table table-striped table-hover table-bordered" id="tblWorkOrderDetails" width="100%">
+                                <thead class="header-fixed" style="background-color: #ECECFE;font-weight:bold;text-align:center;">
+                                    <tr style="color: White !important;">
+                                        <th style="min-width:50px;">Sr No</th>
+                                        <th style="min-width: 100px;">Uploaded Work Copy</th>
+                                        <th style="min-width: 150px;">Project Type </th>
+                                        <th style="min-width: 100px;">Fin.Year</th>
+                                        <th style="min-width: 150px;">Work Name</th>
+                                        <th style="min-width: 80px;">A.A. No</th>
+                                        <th style="min-width: 90px;">A.A. Date</th>
+                                        <th style="min-width: 80px;">Work Order No</th>
+                                        <th style="min-width: 90px;"> Work Order Date</th>
+                                        <th style="min-width: 90px;"> Work End Date</th>
+                                        <th style="min-width: 130px;">Contractor Details </th>
+                                        <th style="min-width: 100px;">KYC Document Details</th>
+                                        <th style="min-width: 100px;">A.A.Amount</th>
+                                        <th style="min-width: 120px;text-align:center !important;">Tender Amount (In Rs.)</th>
+                                        <th style="min-width: 120px;text-align:center !important;">Total Paid Amount (In Rs.)</th>
+                                        <th style="min-width: 120px;text-align:center !important;">Total Pending Amount (In Rs.)</th>
+                                        <th style="min-width: 60px;">RA No.</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/script/init/workdetailsbyid_init.js"></script>
+<script src="~/script/pages/workorder.js"></script>
+<script>
+    $('#ddlSearch').change(function () {
+        debugger;
+        var ddlId = parseInt($(this).val());
+        switch (ddlId) {
+            case 1:
+                $('#lbl_Search').text("Enter PAN Number");
+                $("#txtInsertHere").attr("placeholder", "Enter PAN Number");
+                break;
+            case 2:
+                $('#lbl_Search').text("Enter TAN Number");
+                $("#txtInsertHere").attr("placeholder", "Enter TAN Number");
+                break;
+            case 3:
+                $('#lbl_Search').text("Enter AADHAR Number");
+                $("#txtInsertHere").attr("placeholder", "Enter AADHAR Number");
+                break;
+            case 4:
+                $('#lbl_Search').text("Enter Name");
+                $("#txtInsertHere").attr("placeholder", "Enter Name");
+                break;
+        }
+    });
+</script>
+
