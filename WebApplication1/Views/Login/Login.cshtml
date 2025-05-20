@@ -1,0 +1,284 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <link rel="icon" href="~/image/favicon.png" type="image/x-icon">
+    <title>Swachh Bharat Mission</title>
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="~/otika-bootstrap-admin-template/assets/css/app.min.css">
+    <link rel="stylesheet" href="~/otika-bootstrap-admin-template/assets/bundles/bootstrap-social/bootstrap-social.css">
+    <link rel="stylesheet" href="~/otika-bootstrap-admin-template/assets/bundles/summernote/summernote-bs4.css">
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="~/otika-bootstrap-admin-template/assets/css/style.css">
+    <link rel="stylesheet" href="~/otika-bootstrap-admin-template/assets/css/components.css">
+    <!-- Custom style CSS -->
+    <link rel="stylesheet" href="~/otika-bootstrap-admin-template/assets/css/custom.css">
+    <link rel="stylesheet" href="~/otika-bootstrap-admin-template/assets/bundles/owlcarousel2/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/otika-bootstrap-admin-template/assets/bundles/owlcarousel2/dist/assets/owl.theme.default.min.css">
+    <script>
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    </script>
+
+
+    <style>
+        .obscured {
+            -webkit-text-security: disc; /* For Chrome, Safari, Edge */
+            text-security: disc; /* For Firefox */
+        }
+    </style>
+
+</head>
+<body>
+    <div class="loader"></div>
+    <div id="app">
+        <div class="main-content" style="padding-top:10px;padding-left:20px">
+            <div class="card" style="box-shadow:#a8a8a8 inset -2px 0px 9px 2px;">
+                <div class="col-12 col-md-12 col-lg-12">
+
+                    <div class="container-fluid">
+                        <div class="row nav-fill">
+                            <div class="col-auto" style="margin-top: 10px;">
+                                <div class="header-wrapper">
+                                    <div class="header-title">
+                                        <img src="https://mnre.gov.in/wp-content/themes/sdo-theme/images/emblem.svg" alt="Logo">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col d-flex align-items-center justify-content-center">
+                                <div class="title text-left" style="margin-top: 0px;margin-right: auto;">
+                                    <h1><span style="color:#878bd4;">Swachh Bharat Mission</span></h1>
+                                    <p>
+                                        <b>
+                                            (Department of Urban Development, Government of Maharashtra)
+                                        </b>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-12" style="margin-top:25px;">
+                                <div class="card card-statistic-2 card l-bg-orange">
+                                    <div class="card-icon shadow-primary bg-cyan" style="margin-left: 5px;">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <span>
+                                        <br />
+                                        <b>
+                                            @* <h5 style="margin-top:22px;"> 02063151418 </h5> *@
+                                            <a id="texta" class="text" style=" cursor: pointer;color:White !important;" href="tel:+ 02063151418 ">02063151418</a>
+                                        </b>
+                                    </span><br />
+                                    <span>
+                                        <b>Monday to Friday</b><br />
+                                        <b>10:00AM to 6:00PM</b>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-12" style="margin-top:25px;">
+                                <div class="card card-statistic-2  card l-bg-red">
+                                    <div class="card-icon bg-cyan" style="margin-left: 5px;">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div class="card-wrap" style="margin-top: 35px; font-size:12px;">
+                                        <b>
+                                            <a style="color: white;cursor: pointer; " href="mailto:helpdesk@mhsbm2.com">helpdesk@mhsbm2.com</a>
+                                        </b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Main Content -->
+                    <div class="section-body">
+                        <div class="row">
+                            <div class="col-12 col-md-12 col-lg-8">
+                                <div class="card-header" style="background-color:#878bd4">
+                                    <h6 style="color:white;">WELCOME TO SWACHH BHARAT MISSION</h6>
+                                    <marquee direction="left" style="color:white;" onmouseover="stop()" onmouseout="start()">
+                                        प्रणाली बाबत आपणास काहीही अडचण असल्यास फक्त helpdesk@mhsbm2.com या अधिकृत ई-मेल आयडी किंवा 02063151418 या क्रमांकावर संपर्क साधावा.
+                                    </marquee>
+                                </div>
+                                <div class="padding-20">
+                                    <ul class="nav nav-tabs" id="myTab2" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="home-tab2" data-toggle="tab" href="#about" role="tab"
+                                               aria-selected="true">About</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="profile-tab2" data-toggle="tab" href="#settings" role="tab"
+                                               aria-selected="false">Images</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content tab-bordered" id="myTab3Content">
+                                        <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="home-tab2">
+                                            <p>
+                                                <div class="left-block">
+                                                    <h3><span style="color:black;">Swachh Bharat Mission</span></h3>
+                                                    <p style="margin-left: 15px;">
+                                                        <b>
+                                                            Swachh Bharat Mission, the world’s largest sanitation initiative was launched by the Prime Minister of India in 2014 to achieve an Open Defecation Free India by October 2, 2019, as a tribute to Mahatma Gandhi. The programme led to the construction of over 10 crore individual household toilets, taking sanitation coverage from 39% in 2014 to 100% in 2019 when around 6 lakh villages declared themselves Open Defecation Free (ODF).
+                                                        </b>
+                                                    </p>
+                                                </div>
+                                            <p style="margin-left: 15px;">
+                                                <b>
+                                                    Swachh Bharat Mission, Swachh Bharat Abhiyan, or Clean India Mission is a country-wide campaign initiated by the Government of India on 2 October 2014 to eliminate open defecation and improve solid waste management and to create Open Defecation Free (ODF) villages.
+                                                    The program also aims to increase awareness of menstrual health management.
+                                                    It is a restructured version of the Nirmal Bharat Abhiyan which was launched by the Congress in 2009.
+                                                </b>
+                                            </p>
+                                            <p style="margin-left: 15px;">
+                                                <b>
+                                                    The second phase of the mission aims to sustain the open defecation-free status and improve the management of solid and liquid waste, while also working to improve the lives of sanitation workers.
+                                                </b>
+                                            </p>
+                                        </div>
+                                        <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="profile-tab2">
+                                            <div method="post" class="needs-validation">
+                                                <div class="card-body">
+                                                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                                        <div class="carousel-inner">
+                                                            <div class="carousel-item active">
+                                                                <img src="~/image/images21.jpg" />
+                                                                <img src="~/image/images26.jpg" />
+                                                                <p>
+                                                                    <b>
+                                                                        “A clean India would be the best tribute India could pay to Mahatma Gandhi on his 150 birth anniversary in 2019,” said Shri Narendra Modi as he launched the Swachh Bharat Mission at Rajpath in New Delhi.
+                                                                        On 2nd October 2014, Swachh Bharat Mission was launched throughout length and breadth of the country as a national movement.
+                                                                        The campaign aims to achieve the vision of a ‘Clean India’ by 2nd October 2019.
+                                                                    </b>
+                                                                </p>
+                                                            </div>
+                                                            <div class="carousel-item">
+                                                                <img src="~/image/images21.jpg" />
+
+                                                                <p>
+                                                                    The second phase of the mission aims to sustain the open defecation-free status and improve the management of solid and liquid waste, while also working to improve the lives of sanitation workers.
+                                                                    The mission is aimed at progressing towards target 6.2 of the Sustainable Development Goals Number 6 established by the United Nations in 2015.
+                                                                </p>
+                                                            </div>
+                                                            <div class="carousel-item">
+                                                                <img src="~/image/images26.jpg" />
+
+                                                                <p>
+                                                                    The Swachh Bharat Abhiyan is the most significant cleanliness campaign by the Government of India.
+                                                                    Shri Narendra Modi led a cleanliness pledge at India Gate, which about thirty lakh government employees across the country joined.
+                                                                    He also flagged off a walkathon at Rajpath and surprised people by joining in not just for a token few steps, but marching with the participants for a long way.
+                                                                </p>
+                                                            </div>
+                                                            <div class="carousel-item">
+                                                                <p>
+                                                                    While leading the mass movement for cleanliness, the Prime Minister exhorted people to fulfil Mahatma Gandhi’s dream of a clean and hygienic India.
+                                                                    Shri Narendra Modi himself initiated the cleanliness drive at Mandir Marg Police Station.
+                                                                    Picking up the broom to clean the dirt, making Swachh Bharat Abhiyan a mass movement across the nation, the Prime Minister said people should neither litter, nor let others litter.
+                                                                </p>
+                                                                <img src="~/image/images21.jpg" />
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-12 col-lg-4">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card-header" style="background-color:#878bd4">
+                                            <h6 style="color:white" s>Login</h6>
+                                        </div>
+                                        <img src="~/image/images(swachh bhart mission).jpg" class="img-fluid" alt="Responsive image" style="display: block;margin-left: auto;margin-right: auto;width: inherit;max-height:100%;" />
+                                        <div class="card-body">
+                                            <div method="POST" action="#" class="needs-validation" novalidate="">
+                                                <div class="form-group">
+                                                    <label for="UserName">User Name</label>
+                                                    <input id="txtUserName" type="text" class="form-control" name="UserName" tabindex="1" maxlength="20" autocomplete="new-username" required autofocus>
+                                                    <div class="invalid-feedback">
+                                                        Please fill in your User Name
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="d-block">
+                                                        <label for="password" class="control-label">Password</label>
+                                                    </div>
+                                                    <input type="text" class="form-control obscured" id="pwd" name="password" tabindex="2" maxlength="20" autocomplete="new-password" required>
+                                                    <div class="invalid-feedback">
+                                                        please fill in your password
+                                                    </div>
+                                                </div>
+                                                <div id="div_CapsLockNotification" style="text-align:left;margin-top:-25px; display:none;">
+                                                    <label id="lbl_CapsLockNotification" style="color:red;font-weight:bold;">
+                                                        Caps Lock is on.
+                                                    </label>
+                                                </div>
+                                                <br />
+                                                <div class="card-table-action" style="margin-top: -10px; margin-bottom: 15px !important">
+                                                    <span id="Label1" style="font-weight: bold;">
+                                                        Note: Username and Password are Case Sensitive
+                                                    </span>
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <input type="button" class="btn btn-primary btn-lg btn-block" tabindex="4" id="btnlogin" value="Login" />
+                                                </div>
+                                                <div class="card-table-action " id="div_blockUserNotification" style="text-align:center;display:none;">
+                                                    <label id="lbl_blockUserNotification" style="color:red;font-weight:bold; font-size:16px;">
+                                                    </label>
+                                                </div>
+
+                                                <div class="float-right" style=" margin-top: -18px;">
+                                                    <a href="/ForgotPassword/ForgotPassword" class="text-small">
+                                                        Forgot Username/Password
+                                                    </a>
+                                                </div>
+                                                <div style="text-align:end;">
+                                                        <img src="~/image/bankofmaharashtra.png" class="img-fluid" alt="Responsive image" />
+                                                </div>
+                                                <div style="text-align:center; font-weight: bold;">
+                                                 <span>Power by Bank of Maharashtra</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <footer class="main-footer" style="text-align:center;padding:0px;">
+            <div>
+                <p>
+                    Contents On This Website Are Owned, Updated And Managed By The Urban Development Department, Government Of Maharashtra.<br />
+                    Site is technically designed, hosted and maintained by <b>Bank of Maharashtra.</b><br />
+                </p>
+            </div>
+            <div class="footer-right">
+            </div>
+        </footer>
+    </div>
+    <!-- General JS Scripts -->
+    <script src="~/otika-bootstrap-admin-template/assets/js/app.min.js"></script>
+    <!-- JS Libraies -->
+    <script src="~/otika-bootstrap-admin-template/assets/bundles/summernote/summernote-bs4.js"></script>
+    <!-- Page Specific JS File -->
+    <!-- Template JS File -->
+    <script src="~/otika-bootstrap-admin-template/assets/js/scripts.js"></script>
+    <!-- Custom JS File -->
+    <script src="~/otika-bootstrap-admin-template/assets/js/custom.js"></script>
+    <!-- Sweetalert JS File -->
+    <script src="~/otika-bootstrap-admin-template/assets/bundles/sweetalert/sweetalert.min.js"></script>
+    <script src="~/otika-bootstrap-admin-template/assets/js/page/sweetalert.js"></script>
+</body>
+</html>
+<script src="~/script/pages/login.js"></script>
